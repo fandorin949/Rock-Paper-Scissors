@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<main>
+    <script>
+        let gamesPlayed = 1;
+        let userWins = 0;
+        let compWins = 0;
+        let ties = 0;
+
+        function computerPlay() {
+            let randNum = Math.floor(Math.random()*3)+1;
+            if (randNum === 1) {
+                return 'rock';
+            } else if (randNum === 2) {
+                return 'paper';
+            } else if (randNum === 3) {
+                return 'scissors';
+            }
+        }
+
+        function playRound(playerSelection, computerSelection) {
+            switch (playerSelection.toLowerCase()) {
+                case 'rock':
+                    switch (computerSelection) {
+                        case 'rock':
+                            ties += 1;
+                            return "Rock does not beat rock. It's a tie!";
+                            break;
+                        case 'paper': 
+                            compWins+=1;
+                            return "Rock does not beat paper. You lose!";
+                            break;
+                        case 'scissors': 
+                            userWins+=1;
+                            return 'Rock beats Scissors. You win!';
+                            break;
+                        default: 
+                            return 'Something went wrong.';
+                    }
+                    break;
+                case 'paper': 
+                    switch (computerSelection) {
+                        case 'rock': 
+                            userWins+=1;
+                            return 'Paper beats Rock. You win!';
+                            break;
+                        case 'paper': 
+                            ties+=1;
+                            return 'Paper does not beat paper. It\'s a tie!';
+                            break;
+                        case 'scissors': 
+                            compWins+=1;
+                            return 'Paper does not beat scissors. You lose!';
+                            break;
+                        default: 
+                            return 'Something went wrong.';
+                    }
+                    break;
+                case 'scissors': 
+                    switch (computerSelection) {
+                        case 'rock': 
+                            compWins+=1;
+                            return 'Scissors do not beat rock. You lose!';
+                            break;
+                        case 'paper': 
+                            userWins+=1;
+                            return 'Scissors beat paper. You win!';
+                            break;
+                        case 'scissors': 
+                            ties+=1;
+                            return 'Scissors do not beat scissors. It\'s a tie!';
+                            break;
+                        default: 
+                            return 'Something went wrong.';
+                    }
+                    break;
+                default: 
+                    return 'Something went wrong.';
+            }
+        }
+
+        function game() {
+            while (gamesPlayed <= 5) {
+                const playerSelection = window.prompt("Please choose: rock, paper, or scissors");
+                let computerSelection = computerPlay();
+                console.log('The computer chose: ' + computerSelection + '.');
+                console.log(playRound(playerSelection, computerSelection));
+                console.log('User score: '+userWins);
+                console.log('Computer score: '+compWins);
+                console.log('Ties: '+ties);
+                gamesPlayed+=1;
+            }
+            console.log('Game over! The final score is: \n User score: ' + userWins +'\n Computer score: ' + compWins + '\n Ties: ' + ties)
+        }
+        console.log(game())
+    </script>
+</main>
+</html>
